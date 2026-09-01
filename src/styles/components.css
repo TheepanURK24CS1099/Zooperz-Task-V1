@@ -171,9 +171,18 @@
 
 .brand-header__icons {
   display: flex;
+  align-items: center;
   gap: var(--space-3);
   font-size: 0.85rem;
   font-weight: 600;
+}
+
+.brand-header__icons a {
+  white-space: nowrap;
+}
+
+.brand-header__icons a:hover {
+  text-decoration: underline;
 }
 
 .brand-header__nav {

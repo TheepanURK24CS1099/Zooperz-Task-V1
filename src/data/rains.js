@@ -16,11 +16,11 @@ export const rainsHero = {
 }
 
 export const rainsProducts = [
-  { title: 'The Field Boot', price: '€149', badge: 'New', imageLabel: 'PRODUCT IMAGE — BOOT' },
-  { title: 'Mirage Clog', price: '€89', badge: null, imageLabel: 'PRODUCT IMAGE — CLOG' },
-  { title: 'Trail Runner Low', price: '€119', badge: 'Popular', imageLabel: 'PRODUCT IMAGE — RUNNER' },
-  { title: 'Commuter Sneaker', price: '€99', badge: null, imageLabel: 'PRODUCT IMAGE — SNEAKER' },
-  { title: 'All-Weather Sandal', price: '€69', badge: 'Limited', imageLabel: 'PRODUCT IMAGE — SANDAL' },
+  { id: 'rains-field-boot', title: 'The Field Boot', price: '€149', priceValue: 149, currency: '€', badge: 'New', imageLabel: 'PRODUCT IMAGE — BOOT' },
+  { id: 'rains-mirage-clog', title: 'Mirage Clog', price: '€89', priceValue: 89, currency: '€', badge: null, imageLabel: 'PRODUCT IMAGE — CLOG' },
+  { id: 'rains-trail-runner', title: 'Trail Runner Low', price: '€119', priceValue: 119, currency: '€', badge: 'Popular', imageLabel: 'PRODUCT IMAGE — RUNNER' },
+  { id: 'rains-commuter-sneaker', title: 'Commuter Sneaker', price: '€99', priceValue: 99, currency: '€', badge: null, imageLabel: 'PRODUCT IMAGE — SNEAKER' },
+  { id: 'rains-weather-sandal', title: 'All-Weather Sandal', price: '€69', priceValue: 69, currency: '€', badge: 'Limited', imageLabel: 'PRODUCT IMAGE — SANDAL' },
 ]
 
 export const rainsCategoryTiles = [

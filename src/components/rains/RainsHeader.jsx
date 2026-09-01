@@ -1,6 +1,10 @@
+import { Link } from 'react-router-dom'
 import { rainsNav } from '../../data/rains'
+import { useCart } from '../../context/CartContext'
 
 export default function RainsHeader() {
+  const { itemCount } = useCart()
+
   return (
     <header className="brand-header brand-header--rains">
       <div className="brand-header__row">
@@ -8,7 +12,7 @@ export default function RainsHeader() {
         <span className="brand-header__logo">{rainsNav.logo}</span>
         <div className="brand-header__icons">
           <button aria-label="Search" type="button">⌕</button>
-          <button aria-label="Cart, 0 items" type="button">Bag (0)</button>
+          <Link to="/checkout" aria-label={`Bag, ${itemCount} items`}>Bag ({itemCount})</Link>
         </div>
       </div>
       <nav className="brand-header__nav" aria-label="RAINS primary navigation">

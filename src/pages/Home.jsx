@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom'
 import AnnouncementBar from '../components/shared/AnnouncementBar'
 import ComponentPreview from '../components/shared/ComponentPreview'
 import Newsletter from '../components/shared/Newsletter'
 import SiteFooter from '../components/shared/SiteFooter'
+import { useCart } from '../context/CartContext'
 
 import RainsHeader from '../components/rains/RainsHeader'
 import RainsHero from '../components/rains/RainsHero'
@@ -27,6 +29,10 @@ const NAV_LINKS = [
   { href: '#workflow', label: 'Workflow' },
 ]
 
+const CHECKOUT_COMPONENTS = [
+  'CheckoutStepper', 'OrderSummary', 'CartReviewStep', 'ShippingStep', 'PaymentStep', 'ReviewStep', 'ConfirmationStep',
+]
+
 const WORKFLOW_STEPS = [
   'Reference Research',
   'UI Pattern Identification',
@@ -45,6 +51,8 @@ const COMPONENT_MAP = {
 }
 
 export default function Home() {
+  const { addToCart, itemCount } = useCart()
+
   return (
     <div className="page">
       <a className="skip-link" href="#main">Skip to main content</a>
@@ -57,6 +65,11 @@ export default function Home() {
               {NAV_LINKS.map((link) => (
                 <li key={link.href}><a href={link.href}>{link.label}</a></li>
               ))}
+              <li>
+                <Link to="/checkout" className="site-header__cart-link" aria-label={`Cart, ${itemCount} items`}>
+                  Cart ({itemCount})
+                </Link>
+              </li>
             </ul>
           </nav>
         </div>
@@ -72,6 +85,11 @@ export default function Home() {
               rebuilds their recurring section patterns as original, prop-driven React components —
               using placeholder imagery and paraphrased copy throughout. No proprietary code, assets,
               or product photography are used.
+            </p>
+            <p className="overview__lede overview__lede--note">
+              Product cards below are wired to a working (demo-only) cart — use “Add to Cart”, then open
+              the cart from the header to walk through a full <Link to="/checkout">Cart → Shipping → Payment → Review</Link> flow.
+              No backend, no real payment processing, and nothing ever leaves your browser.
             </p>
           </div>
           <div className="overview__references">
@@ -115,8 +133,8 @@ export default function Home() {
             <RainsCategorySection />
           </ComponentPreview>
 
-          <ComponentPreview name="RainsProductSection" description="Horizontally scrolling product marquee">
-            <RainsProductSection />
+          <ComponentPreview name="RainsProductSection" description="Horizontally scrolling product marquee — Add to Cart is wired to the live demo cart">
+            <RainsProductSection onAddToCart={addToCart} />
           </ComponentPreview>
 
           <ComponentPreview name="RainsEditorial" description="Alternating full-width story blocks per category">
@@ -158,9 +176,9 @@ export default function Home() {
             <MokobaraCategorySection />
           </ComponentPreview>
 
-          <ComponentPreview name="MokobaraProductSection" description="Grid of product cards with badges, dual pricing, color swatches — reused for Bestsellers and New Arrivals">
-            <MokobaraProductSection eyebrow="Bestsellers" title="What everyone's packing" products={mokobaraBestsellers} />
-            <MokobaraProductSection eyebrow="New Arrivals" title="Just landed" products={mokobaraNewArrivals} />
+          <ComponentPreview name="MokobaraProductSection" description="Grid of product cards with badges, dual pricing, color swatches — reused for Bestsellers and New Arrivals; Add to Cart is wired to the live demo cart">
+            <MokobaraProductSection eyebrow="Bestsellers" title="What everyone's packing" products={mokobaraBestsellers} onAddToCart={addToCart} />
+            <MokobaraProductSection eyebrow="New Arrivals" title="Just landed" products={mokobaraNewArrivals} onAddToCart={addToCart} />
           </ComponentPreview>
 
           <ComponentPreview name="MokobaraEditorial" description="Single brand-story block pairing image and copy">
@@ -187,6 +205,10 @@ export default function Home() {
             <div className="component-map__group">
               <h3>Shared</h3>
               <ul>{COMPONENT_MAP.shared.map((c) => <li key={c}><code>{c}</code></li>)}</ul>
+            </div>
+            <div className="component-map__group">
+              <h3>Checkout Flow</h3>
+              <ul>{CHECKOUT_COMPONENTS.map((c) => <li key={c}><code>{c}</code></li>)}</ul>
             </div>
           </div>
         </section>
@@ -221,12 +243,14 @@ export default function Home() {
           </div>
           <div>
             <h4>Technology</h4>
-            <p>React · Vite · JavaScript · CSS</p>
+            <p>React · React Router · Vite · JavaScript · CSS</p>
           </div>
           <div>
             <h4>Note</h4>
             <p>Built for internship submission. All imagery is placeholder content; all copy is
-              original or paraphrased. No Shopify Liquid, theme code, or proprietary assets are used.</p>
+              original or paraphrased. No Shopify Liquid, theme code, or proprietary assets are used.
+              The <Link to="/checkout">checkout flow</Link> is a client-side demo only — no backend,
+              no real payment processing, no data leaves your browser.</p>
           </div>
         </div>
         <p className="page-footer__legal">© {new Date().getFullYear()} Component study project. Not affiliated with RAINS or Mokobara.</p>
